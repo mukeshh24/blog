@@ -35,7 +35,7 @@ const MainSidebar = () => {
                     <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton>
                         <item.icon />
-                        <Link to={item.urlRoute}>{item.heading}</Link>
+                        <Link to={item.urlRoute} className="w-full">{item.heading}</Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );
@@ -78,7 +78,7 @@ const MainSidebar = () => {
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <GoDot />
-                  <Link to={""}>Category Item</Link>
+                  <Link to={""} className="w-full">Category Item</Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

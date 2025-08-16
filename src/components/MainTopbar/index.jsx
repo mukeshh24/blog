@@ -24,7 +24,7 @@ const MainTopbar = () => {
           </form>
         </div>
         <div>
-          <Button className="rounded-full cursor-pointer">
+          <Button className="rounded-full">
             <LuLogIn />
             <Link to={SignInRoute}>Sing In</Link>
           </Button>
