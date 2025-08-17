@@ -8,13 +8,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SignInRoute } from "@/routes/UrlRoutes";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const formSchema = z
   .object({
@@ -29,6 +30,9 @@ const formSchema = z
   });
 
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState("");
+  const [showConfirmPassword, setShowConfirmPassword] = useState("");
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -95,7 +99,7 @@ const SignUp = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-5">
+            <div className="mb-5 relative">
               <FormField
                 control={form.control}
                 name="password"
@@ -104,7 +108,7 @@ const SignUp = () => {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Enter password"
                         {...field}
                       />
@@ -113,10 +117,17 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-8 right-3 cursor-pointer border-0 outline-0"
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </button>
             </div>
 
             {/* Confirm Password */}
-            <div className="mb-5">
+            <div className="mb-5 relative">
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -125,8 +136,8 @@ const SignUp = () => {
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
                       <Input
-                        type="password"
-                        placeholder="Confirm password"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="Enter password again"
                         {...field}
                       />
                     </FormControl>
@@ -134,10 +145,17 @@ const SignUp = () => {
                   </FormItem>
                 )}
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute top-8 right-3 cursor-pointer border-0 outline-0"
+              >
+                {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
+              </button>
             </div>
 
             {/* Submit */}
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               Sign Up
             </Button>
 

@@ -8,13 +8,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SignUpRoute } from "@/routes/UrlRoutes";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -22,6 +23,8 @@ const formSchema = z.object({
 });
 
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState("");
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,7 +68,7 @@ const SignIn = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-5">
+            <div className="mb-5 relative">
               <FormField
                 control={form.control}
                 name="password"
@@ -74,7 +77,7 @@ const SignIn = () => {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
                         {...field}
                       />
@@ -83,10 +86,17 @@ const SignIn = () => {
                   </FormItem>
                 )}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-8 right-3 cursor-pointer border-0 outline-0"
+              >
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </button>
             </div>
 
             {/* Submit */}
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               Sign In
             </Button>
 
