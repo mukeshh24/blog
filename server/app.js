@@ -11,12 +11,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://blog-rho-nine-41.vercel.app"],
+    origin: ["http://localhost:5173", "https://blog-g9rx.vercel.app"],
     credentials: true,
   }),
 );
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", userRouter);
 app.use("/api/category", categoryRouter);
